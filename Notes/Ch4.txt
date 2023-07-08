@@ -1,0 +1,16 @@
+What is divide & Conquer?
+- Divide  : the problem into a number of subproblems that are smaller instances of the same problem.
+-Conquer : the subproblems by solving them recursively. If the subproblem sizes are small enough, however, just solve the subproblems in a straightforward manner.
+-Combine : the solutions to the subproblems into the solution for the original problem.
+--- The main idea:
+1- Divide the array into 2 pieces
+2- Merge sort them 
+3- Merge the 2 sorted pieces O(n)
+--- so here  is the question?
+- why we need to these three steps in our solution?
+ans:first if we find a brute force for this kind of problemes like find the maximumsubarraysum we will think about using
+two for loops so the complexity o(n^2) so is there any chance to improve our complexity?
+yes:we have we can divide each problem into smaller subproblems and then if we reach to the smallest unit means
+"the length of subproblem equal to 1 then it's the solution then we seek to combine the smaller subproblems to maximize or get the maximum 
+subarraysum "by doing these steps we we've improved our complexity which become O(nlogn)
+
