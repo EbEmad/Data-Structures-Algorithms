@@ -14,3 +14,5 @@ yes:we have we can divide each problem into smaller subproblems and then if we r
 "the length of subproblem equal to 1 then it's the solution then we seek to combine the smaller subproblems to maximize or get the maximum 
 subarraysum "by doing these steps we we've improved our complexity which become O(nlogn)
 
+
+new update
