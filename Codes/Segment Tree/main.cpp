@@ -1,53 +1,131 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std ;
+#define int long long
+#define endl '\n'
+#define all(a) a.begin() , a.end()
+#define alr(a) a.rbegin() , a.rend()
+const int N=2e5;
 #define ll long long
-void const_tree(vector<int>a,vector<int>&seg,int low,int high,int pos){
-    if(low==high){
-        seg[pos]=a[low];
-        return ;
-    }
-    ll mid=(low+high)/2;
-    const_tree(a,seg,low,mid,2*pos+1);
-    const_tree(a,seg,mid+1 ,high,2*pos+2);
-    seg[pos]=min(seg[2*pos+1],seg[2*pos+2]);
+using namespace std;
 
-}
-void func(int a[],int seg[],int l,int h,int pos){
-    if(l==h){
-        seg[pos]=a[l];
-        return ;
-    }
-    ll m=(l+h)/2;
-    func(a,seg,l,m,2*pos+1);
-    func(a,seg,m+1,h,2*pos+2);
-    seg[pos]=min(seg[2*pos+1],seg[2*pos+2]);
-}
-int get_ans(int seg[],int ql,int qh,int l,int h,int pos){
-    if(ql>h || l>qh)return 1000;
-    if(ql<l && qh>=h)return seg[pos];
-    ll m=(l+h)/2;
-    return min(get_ans(seg,ql,qh,l,m,2*pos+1),get_ans(seg,ql,qh,m+1,h,2*pos+2));
-}
-int ans_query(vector<int>seg,int qlow,int qhigh,int low,int high,int pos){
-    if(qlow<=low && qhigh>=high){
-        return seg[pos];
-    }
-    if(qlow>high || qhigh<low)return 1e9;
-    ll mid=(low+high)/2;
-    return min(ans_query(seg,qlow,qhigh,low,mid,2*pos+1), ans_query(seg,qlow,qhigh,mid+1,high,2*pos+2));
-}
+struct Node
+{
+    ll val;
+    ll cnt ;
 
-int main() {
-    /*
-     * n=4
-     * -1 2 0 -3
-     */
-    int n;cin>>n;
-      vector<int>a(n);
-     for(int i;i<n;i++)cin>>a[i];
-    vector<int>seg(7);
-    const_tree(a,seg,0,n-1,0);
-    //cout<<ans_query(seg,1,3,0,n-1,0);
-    for(int i=0;i<7;i++)cout<<seg[i]<<" ";
-    return 0;
+    Node()
+    {
+        // update this variable to a value that has no effect on the answer of the operation
+        val = 1e9;
+        cnt=0;
+    }
+
+    Node(long long x,int c)
+    {
+        val = x;
+        cnt=c;
+    }
+};
+
+struct SegTree
+{
+    int tree_sz;
+    vector<Node> Seg_Data;
+    SegTree(int n)
+    {
+        tree_sz = 1;
+        while (tree_sz < n) tree_sz *= 2;
+        Seg_Data.resize(2 * tree_sz, Node());
+    }
+
+    // update this function for the desired operation
+    Node merge(Node & lf, Node & ri)
+    {
+        Node ans = Node();
+        ans.val = min(lf.val, ri.val);
+        ans.cnt+=lf.cnt;
+        ans.cnt+=ri.cnt;
+        return ans;
+    }
+
+    void init(vector<long long> & nums, int ni, int lx, int rx) {
+
+        if(rx - lx == 1)
+        {
+            if(lx < (int)nums.size())
+            {
+                Seg_Data[ni] = Node(nums[lx],0);
+            }
+            return;
+        }
+
+        int mid = lx + (rx - lx) / 2;
+        init(nums, 2 * ni + 1, lx, mid);
+        init(nums, 2 * ni + 2, mid, rx);
+
+        Seg_Data[ni] = merge(Seg_Data[2 * ni + 1], Seg_Data[2 * ni + 2]);
+    }
+
+    void init(vector<int> & nums)
+    {
+        init(nums, 0, 0, tree_sz);
+    }
+
+    void set(int idx,int val,  int node, int lx, int rx)
+    {
+        if(rx - lx == 1)
+        {
+            Seg_Data[node] = Node(val,1);
+            return;
+        }
+
+        int mid = (lx + rx) / 2;
+        if(idx < mid)
+            set(idx,val,  2 * node + 1, lx, mid);
+        else
+            set(idx,val,  2 * node + 2, mid, rx);
+
+        Seg_Data[node] = merge(Seg_Data[2 * node + 1], Seg_Data[2 * node + 2]);
+    }
+    void set(int idx,int val) // zero indexed
+    {
+        set(idx, val, 0, 0, tree_sz);
+    }
+
+    Node get_range(int idx,int val, int node, int lx, int rx)
+    {
+        if(rx-lx==1){
+            if(lx<idx && Seg_Data[lx].val>val){
+                return Seg_Data[lx];
+            }
+            return Node();
+        }
+        if(Seg_Data[node].val>val && rx<=idx)return Seg_Data[node];
+        int m=(rx+lx)/2;
+        Node lf= get_range(idx,val,2*node+1,lx,m);
+        Node ri= get_range(idx,val,2*node+2,m,rx);
+        return merge(lf,ri);
+    }
+
+    long long get_range(int val,int idx) // zero indexed range and get from l to r-1, i.e [l,r)
+    {
+        return get_range(idx,val, 0, 0, tree_sz).cnt;
+    }
+
+};
+signed main(){
+    ios_base::sync_with_stdio(0); cin.tie(0);cout.tie(0);
+    int sz,q,typ;cin>>sz;
+    SegTree tree(sz);
+    vector<int>v(sz);
+    for(int i=0;i<sz;i++){
+        cin>>v[i];
+    }
+    tree.init(v);
+    for(int i=0;i<sz;i++){
+       cout<<tree.get_range(v[i],i)<<" ";
+       tree.set(i,v[i]);
+    }
+
+    return 0 ;
 }

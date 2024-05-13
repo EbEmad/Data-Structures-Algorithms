@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Ebrahim Emad/Projects/Codes/Segment Tree
+# Install script for directory: D:/DataStructure&Algorithms/Codes/Segment Tree
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Ebrahim Emad/Projects/Codes/Segment Tree/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/DataStructure&Algorithms/Codes/Segment Tree/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

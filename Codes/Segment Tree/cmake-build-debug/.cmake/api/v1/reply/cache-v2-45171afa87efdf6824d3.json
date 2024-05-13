@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Ebrahim Emad/Projects/Codes/Segment Tree/cmake-build-debug"
+			"value" : "d:/DataStructure&Algorithms/Codes/Segment Tree/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Ebrahim Emad/Projects/Codes/Segment Tree/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "D:/DataStructure&Algorithms/Codes/Segment Tree/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -647,7 +647,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Ebrahim Emad/Projects/Codes/Segment Tree"
+			"value" : "D:/DataStructure&Algorithms/Codes/Segment Tree"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1263,7 +1263,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Ebrahim Emad/Projects/Codes/Segment Tree/cmake-build-debug"
+			"value" : "D:/DataStructure&Algorithms/Codes/Segment Tree/cmake-build-debug"
 		},
 		{
 			"name" : "Segment_Tree_IS_TOP_LEVEL",
@@ -1287,7 +1287,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Ebrahim Emad/Projects/Codes/Segment Tree"
+			"value" : "D:/DataStructure&Algorithms/Codes/Segment Tree"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
